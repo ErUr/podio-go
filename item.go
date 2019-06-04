@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"reflect"
 	"time"
+	"bytes"
 )
 
 // optional custom types
