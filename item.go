@@ -447,14 +447,14 @@ type ItemListMini struct {
 // https://developers.podio.com/doc/items/filter-items-4496747
 func (client *Client) GetItems(appId int64) (items *ItemList, err error) {
 	path := fmt.Sprintf("/item/app/%d/filter?fields=items.fields(files)", appId)
-	err = client.Request("POST", path, nil, nil, &items)
+	err = client.Request("POST", path, nil, bytes.NewBuffer([]byte(`{"limit": 500}`)), &items)
 	return
 }
 
 // https://developers.podio.com/doc/items/filter-items-4496747
 func (client *Client) GetItemsSimple(appId int64) (items *ItemListSimple, err error) {
 	path := fmt.Sprintf("/item/app/%d/filter?fields=items.fields(files)", appId)
-	err = client.Request("POST", path, nil, nil, &items)
+	err = client.Request("POST", path, nil, bytes.NewBuffer([]byte(`{"limit": 500}`)), &items)
 	return
 }
 
