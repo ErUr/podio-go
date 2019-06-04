@@ -64,6 +64,12 @@ func (client *Client) GetFile(fileId int) (file *File, err error) {
 	return
 }
 
+// https://developers.podio.com/doc/files/get-files-on-app-22472
+func (client *Client) GetFilesOnApp(appId int64) (files []File, err error) {
+	err = client.Request("GET", fmt.Sprintf("/file/app/%d", appId), nil, bytes.NewBuffer([]byte(`{"limit": 500}`)), &files)
+	return
+}
+
 func (client *Client) GetFileContents(url string) ([]byte, error) {
 	link := fmt.Sprintf("%s?oauth_token=%s", url, client.authToken.AccessToken)
 	resp, err := http.Get(link)
